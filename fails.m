@@ -1,6 +1,7 @@
 %.........................................................................
 %  Assumptions- No price impact of asset firesales
 %               No aggregate macroeconomic shocks to firms
+%dom_node,int_node,firm_node= number of nodes for the institution
 %.........................................................................
 
 
@@ -9,7 +10,12 @@ function [ repaymentAll, Nsurvive] = fails( network_m,endCondition,dom_node,int_
 %------------------------------------------------------------------------%
 
 %------------------------------------------------------------------------%
-
+domdom_network= network_m(1:dom_node,1:dom_node);
+intint_network= network_m(dom_node+1:dom_node+int_node,dom_node+1:dom_node+int_node);
+intdom_network= network_m(1:dom_node,dom_node+1:dom_node+int_node);
+domint_network= network_m(dom_node+1:dom_node+int_node,1:dom_node);
+domfirm_network= network_m(dom_node+int_node+1:end,1:dom_node);
+intfirm_network= network_m(dom_node+int_node+1:end,dom_node+1:dom_node+int_node);
 
 
 dom_lending = sum(network_m,2);
