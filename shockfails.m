@@ -1,7 +1,11 @@
 
 %individual bank data is unavailable
 
-
+ dom_node=6;     %test data
+ int_node=2;     %test data
+ firm_node=3;     %test data
+ no_network=1;   %test data
+ 
 % dom_loan=loan holding on domestic banks on average (in mils);
 % dom_eq=equity holding on domestic banks on average (in mils)
 % int_loan=loan holding on international banks on average (in mils)
@@ -95,7 +99,7 @@ for k = 1:length(alphaAll)
         S(s) = shockSize;
         
         %%% find fixed point and resulting parameters of networks
-        [xij,Nsurvive] = shock(network,S,R,r,f,flambda,leverage,endCondition);
+        [xij,Nsurvive] = fails(network,endCondition,dom_node,int_node,firm_node);
         survived(k,m) = Nsurvive;
         meanDegree(k,m) = mean(degree);
     end
