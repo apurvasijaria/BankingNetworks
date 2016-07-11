@@ -66,7 +66,6 @@ meannodes=4; %mean degree for internatioanl bank network
  %1st argument= no of international nodes, 2nd srgument= mean degree/2. 
  %third argument for random graph
  networkSys(dom_node+1:dom_node+int_node,dom_node+1:dom_node+int_node)=h;
- 
 %  Plotting the nodes using gplot
 % k = tot_node; coord=[cos((1:k).*(2*pi./k)),sin((1:k).*(2*pi./k))]; %
 % points on a circle for nodes gplot(networkSys(:,:),coord,'-*') axis
