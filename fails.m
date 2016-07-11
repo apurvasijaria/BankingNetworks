@@ -8,7 +8,12 @@
 function [ repaymentAll, Nsurvive] = fails( network_m,endCondition,dom_node,int_node,firm_node)
 
 %------------------------------------------------------------------------%
-
+% domdom_network= network of interbank lending for domestic bank
+% intint_network= network of interbank lending for international bank
+% intdom_network= network of interbank lending for domestic to international bank
+% domint_network= network of interbank lending for international to domestic bank
+% domfirm_network= network of lending for domestic banks to firms
+% intfirm_network= network of lending for international bank to firms
 %------------------------------------------------------------------------%
 domdom_network= network_m(1:dom_node,1:dom_node);
 intint_network= network_m(dom_node+1:dom_node+int_node,dom_node+1:dom_node+int_node);
@@ -18,12 +23,24 @@ domfirm_network= network_m(dom_node+int_node+1:end,1:dom_node);
 intfirm_network= network_m(dom_node+int_node+1:end,dom_node+1:dom_node+int_node);
 
 
-dom_lending = sum(network_m,2);
-borrowing = sum(network_m)';
-assets = lending/f;
-liquidAssets = fLambda*assets;
-seniorliability = (leverage-1)/(leverage*f)*lending - borrowing;
-liabilities = borrowing + seniorliability;
+domdom_lending = sum(domdom_network,2);
+domdom_borrowing = sum(domdom_network)';
+
+intint_lending = sum(intint_network,2);
+intint_borrowing = sum(intint_network)';
+
+intdom_lending = sum(intdom_network,2);
+intdom_borrowing = sum(intdom_network)';
+
+domint_lending = sum(domint_network,2);
+domint_borrowing = sum(domint_network)';
+
+domfirm_lending = sum(domfirm_network,2);
+domfirm_borrowing = sum(domfirm_network)';
+
+intfirm_lending = sum(intfirm_network,2);
+intfirm_borrowing = sum(intfirm_network)';
+
 
 % the return on investment and junior debt are both calculated for a given
 % shock S
